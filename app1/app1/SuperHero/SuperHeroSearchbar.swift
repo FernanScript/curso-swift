@@ -26,7 +26,14 @@ struct SuperHeroSearchbar: View {
             .padding()
             .autocorrectionDisabled()
             .onSubmit {
-                print("Super herooo")
+                Task {
+                    do {
+                        let resonse = try await ApiNetwork().getHerosByQuery(query: superHeroName)
+                        print(resonse)
+                    } catch {
+                        print("error")
+                    }
+                }
             }
             
             Spacer()
